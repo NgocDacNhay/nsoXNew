@@ -1,6 +1,8 @@
 package server;
 
 import real.ItemData;
+import threading.DaemonThread;
+import threading.Server;
 import real.ClanManager;
 
 import java.util.Timer;
@@ -37,6 +39,8 @@ public class BXHManager {
                 for (int i = 0; i < BXHManager.bangXH.length; ++i) {
                     initBXH(i);
                 }
+            Server.instance.daemonThread = new DaemonThread();
+            BXHManager.init();
             //    System.err.println("Refresh BXH");
             }
         }, cl.getTime(), 1000*15*2);

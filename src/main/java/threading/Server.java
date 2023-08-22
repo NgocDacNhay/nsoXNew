@@ -32,6 +32,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.rmi.Naming;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,8 +51,8 @@ import static threading.Manager.MOMENT_REFRESH_BATTLE;
 
 public class Server extends WindowAdapter implements ActionListener {
     public static long TIME_SLEEP_SHINWA_THREAD;
-    private static Server instance;
-    private static Runnable updateBattle;
+    public static Server instance;
+    public static Runnable updateBattle;
     public IBattle globalBattle;
     private ServerSocket listenSocket;
     public volatile static boolean start;
@@ -106,7 +107,7 @@ public class Server extends WindowAdapter implements ActionListener {
             is.read(data);
             ImageIcon img = new ImageIcon(data);
             frame.setIconImage(img.getImage());
-            frame.setSize(200, 320);
+            frame.setSize(200, 360);
             frame.setBackground(Color.BLACK);
             frame.setResizable(false);
             frame.addWindowListener(this);
@@ -148,14 +149,25 @@ public class Server extends WindowAdapter implements ActionListener {
         }
     }
 
+    public void windowClosing(WindowEvent e) {
+        frame.dispose();
+        Server.start = false;
+            System.out.println("Đóng máy chủ.");
+            
+            System.exit(0);
+        
+    }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("shinwa")) {
+
             
             System.out.println("Mãy chủ chưa bật");
             
         }
         if (e.getActionCommand().equals("stop")) {
             
+            this.maintance();
             System.out.println("Máy chủ chưa bật.");
             
         }
@@ -164,14 +176,21 @@ public class Server extends WindowAdapter implements ActionListener {
             util.Debug("Lưu xong");
         }
         if (e.getActionCommand().equals("rank")) {
-            
-            util.Debug("Làm mới bảng xếp hạng");
+            for (int i = 0; i < BXHManager.bangXH.length; ++i) {
+                BXHManager.initBXH(i);
+            }
+            BXHManager.init();
+            System.out.println("Làm mới bảng xếp hạng");
             
         }
         if (e.getActionCommand().equals("player")) {
-            util.Debug("Lưu dữ liệu người chơi");
+            System.out.println("Lưu dữ liệu người chơi");
+              instance.daemonThread = new DaemonThread();
             
-            util.Debug("Lưu xong");
+            instance.daemonThread.addRunner(Server.updateTTA);
+            instance.daemonThread.addRunner(Server.updateRefreshBoss);
+            instance.daemonThread.addRunner(Server.updateBattle);
+        
         }
         if (e.getActionCommand().equals("restartDB")) {
             util.Debug("Bắt đầu khởi động lại!");
@@ -179,6 +198,21 @@ public class Server extends WindowAdapter implements ActionListener {
             util.Debug("Khởi động xong!");
         }
     }
+
+    public void maintance() {
+        try {
+            System.out.println("Chuẩn bị đóng máy chủ.");
+            manager.serverChat("Admin", "Máy chủ bảo trì sau 1 phút, vui lòng thoát game để tránh mất dữ liệu. Nếu cố tình không thoát chúng tôi không chịu trách nhiệm!");
+            Service.startOKDlgServer("Máy chủ bảo trì sau 1 phút, vui lòng thoát game để tránh mất dữ liệu. Nếu cố tình không thoát chúng tôi không chịu trách nhiệm!");
+            System.out.println("Hệ thống Đóng s1au 20s.");
+            Thread.sleep(20000);
+            System.out.println("Hệ thống Bắt đầu đóng máy chủ.");
+            this.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void init() {
         this.manager = new Manager();
@@ -190,7 +224,7 @@ public class Server extends WindowAdapter implements ActionListener {
         Server.geninTournament = GeninTournament.gi();
         Server.candyBattleManager = new CandyBattleManager();
 
-    /*    updateServer = () -> {
+/*        updateServer = () -> {
             for (int j = 0; j < Server.Server_REFRESH.length; ++j) {
                 Calendar rightNow = Calendar.getInstance();
                 int min = rightNow.get(12);
@@ -354,7 +388,7 @@ public class Server extends WindowAdapter implements ActionListener {
             instance.daemonThread.addRunner(Server.updateTTA);
             instance.daemonThread.addRunner(Server.updateRefreshBoss);
             instance.daemonThread.addRunner(Server.updateBattle);
-      //      instance.daemonThread.addRunner(Server.updateServer);
+//            instance.daemonThread.addRunner(Server.updateServer);
         }
         return Server.instance;
     }
