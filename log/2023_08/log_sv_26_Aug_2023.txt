@@ -1,0 +1,4 @@
+[2023/08/26 07:25:12:676] User: dackimdoi - Name: admin - Pass: dackimdoi - IP: 127.0.0.1
+[2023/08/26 07:27:35:726] User: dackimdoi - Name: admin - Pass: dackimdoi - IP: 127.0.0.1
+[2023/08/26 07:28:36:706] User: dackimdoi - Name: admin - Pass: dackimdoi - IP: 127.0.0.1
+[2023/08/26 07:30:19:131] User: dackimdoi - Name: admin - Pass: dackimdoi - IP: 127.0.0.1

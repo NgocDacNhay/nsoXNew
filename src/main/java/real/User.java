@@ -1716,6 +1716,16 @@ public class User extends Actor implements SendMessage {
         } else if (this.nj.isHuman) {
             ThoiTrang.removeThoiTrang(this.nj, itembody.id);
         }
+        for (int k = 0; k < 32; k++) {//Trang bị 2
+            final Item itemD = this.nj.get().ItemBody[k];
+            if (itemD != null) {
+                if(this.nj.isNhanban) {
+                    ThoiTrang.setThoiTrangPT(this.nj.clone, itemD.id);
+                } else if (this.nj.isHuman) {
+                    ThoiTrang.setThoiTrang(this.nj, itemD.id);
+                }  
+            }
+    }
         if (itembody.id == 568) {
             removeEffect(38);
         }
@@ -2815,6 +2825,11 @@ public class User extends Actor implements SendMessage {
         if (index == 4 && (this.nj.get().ItemMounts[0] != null || this.nj.get().ItemMounts[1] != null || this.nj.get().ItemMounts[2] != null || this.nj.get().ItemMounts[3] != null)) {
             this.session.sendMessageLog("Cần phải tháo hết trang bị thú cưới ra trước");
             return;
+        }
+        if (this.nj.isNhanban) {
+            ThoiTrang.removeThoiTrangPT(this.nj.clone,this.nj.clone.ItemMounts[index].id);
+        } else if (this.nj.isHuman) {
+            ThoiTrang.removeThoiTrang(this.nj, this.nj.get().ItemMounts[index].id);
         }
         this.nj.ItemBag[indexItemBag] = this.nj.get().ItemMounts[index];
         this.nj.get().ItemMounts[index] = null;

@@ -1,0 +1,17 @@
+[2023/08/24 05:50:40:048] admin đã mua 1 item 563 với giá 0 xu 0 yên 500 lượng
+[2023/08/24 05:50:41:186] admin đã mua 1 item 557 với giá 0 xu 0 yên 500 lượng
+[2023/08/24 05:50:42:318] admin đã mua 1 item 380 với giá 0 xu 0 yên 500 lượng
+[2023/08/24 05:50:43:489] admin đã mua 1 item 316 với giá 0 xu 0 yên 500 lượng
+[2023/08/24 05:50:46:905] admin đã mua 1 item 93 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:48:034] admin đã mua 1 item 92 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:49:075] admin đã mua 1 item 91 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:50:537] admin đã mua 1 item 90 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:51:614] admin đã mua 1 item 89 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:52:818] admin đã mua 1 item 88 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:54:412] admin đã mua 1 item 87 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:50:55:625] admin đã mua 1 item 86 với giá 1000 xu 0 yên 0 lượng
+[2023/08/24 05:52:35:502] admin đã mua 1 item 796 với giá 0 xu 0 yên 2000 lượng
+[2023/08/24 05:52:37:635] admin đã mua 1 item 799 với giá 0 xu 0 yên 1000 lượng
+[2023/08/24 05:52:41:256] admin đã mua 1 item 896 với giá 0 xu 0 yên 2000 lượng
+[2023/08/24 05:52:44:918] admin đã mua 1 item 248 với giá 0 xu 0 yên 50 lượng
+[2023/08/24 06:18:12:595] Shinwa: admin đã đăng bán 817 item 775 với giá: 1000000 xu.

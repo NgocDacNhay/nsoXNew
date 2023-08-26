@@ -14,6 +14,7 @@ public class ThoiTrang {
     
     protected static void setThoiTrang(Ninja nj, short templateId) {
         switch (templateId) {
+            
             case 903: {
                 nj.setThoiTrang[0] = 129;
                 nj.setThoiTrang[1] = 130;
@@ -58,11 +59,72 @@ public class ThoiTrang {
                 break;
             }
             case 799: {
-                nj.setThoiTrang[3] = 44;
+                if(nj.get().ItemBody[1].id == 897 || nj.get().ItemBody[1].id == 898 || nj.get().ItemBody[1].id == 899 || nj.get().ItemBody[1].id == 900 || nj.get().ItemBody[1].id == 901 || nj.get().ItemBody[1].id == 902 ){
+                
+                    switch(nj.get().ItemBody[1].id){
+                        case 897: {
+                        nj.setThoiTrang[3] = 161;
+                        break;
+                        }
+                        case 898: {
+                            nj.setThoiTrang[3] = 164;
+                            break;
+                        }
+                        case 899: {
+                            nj.setThoiTrang[3] = 163;
+                            break;
+                        }
+                        case 900: {
+                            nj.setThoiTrang[3] = 160;
+                            break;
+                        }
+                        case 901: {
+                            nj.setThoiTrang[3] = 159;
+                            break;
+                        }
+                        case 902: {
+                            nj.setThoiTrang[3] = 162;
+                            break;
+                        }
+                    }
+                } else {
+                    nj.setThoiTrang[3] = 44;
+                }
+                
                 break;
             }
             case 800: {
-                nj.setThoiTrang[3] = 46;
+                if(nj.get().ItemBody[1].id == 897 || nj.get().ItemBody[1].id == 898 || nj.get().ItemBody[1].id == 899 || nj.get().ItemBody[1].id == 900 || nj.get().ItemBody[1].id == 901 || nj.get().ItemBody[1].id == 902 ){
+                
+                    switch(nj.get().ItemBody[1].id){
+                        case 897: {
+                        nj.setThoiTrang[3] = 161;
+                        break;
+                        }
+                        case 898: {
+                            nj.setThoiTrang[3] = 164;
+                            break;
+                        }
+                        case 899: {
+                            nj.setThoiTrang[3] = 163;
+                            break;
+                        }
+                        case 900: {
+                            nj.setThoiTrang[3] = 160;
+                            break;
+                        }
+                        case 901: {
+                            nj.setThoiTrang[3] = 159;
+                            break;
+                        }
+                        case 902: {
+                            nj.setThoiTrang[3] = 162;
+                            break;
+                        }
+                    }
+                } else {
+                    nj.setThoiTrang[3] = 46;
+                }
                 break;
             }
             case 891: {
@@ -70,27 +132,27 @@ public class ThoiTrang {
                 break;
             }
             case 897: {
-                nj.setThoiTrang[3] = 162;
-                break;
-            }
-            case 898: {
-                nj.setThoiTrang[3] = 159;
-                break;
-            }
-            case 899: {
-                nj.setThoiTrang[3] = 164;
-                break;
-            }
-            case 900: {
                 nj.setThoiTrang[3] = 161;
                 break;
             }
-            case 901: {
+            case 898: {
+                nj.setThoiTrang[3] = 164;
+                break;
+            }
+            case 899: {
                 nj.setThoiTrang[3] = 163;
                 break;
             }
-            case 902: {
+            case 900: {
                 nj.setThoiTrang[3] = 160;
+                break;
+            }
+            case 901: {
+                nj.setThoiTrang[3] = 159;
+                break;
+            }
+            case 902: {
+                nj.setThoiTrang[3] = 162;
                 break;
             }
             case 801: {
@@ -299,27 +361,27 @@ public class ThoiTrang {
                 break;
             }
             case 897: {
-                _cl.setThoiTrang[3] = 162;
-                break;
-            }
-            case 898: {
-                _cl.setThoiTrang[3] = 159;
-                break;
-            }
-            case 899: {
-                _cl.setThoiTrang[3] = 164;
-                break;
-            }
-            case 900: {
                 _cl.setThoiTrang[3] = 161;
                 break;
             }
-            case 901: {
+            case 898: {
+                _cl.setThoiTrang[3] = 164;
+                break;
+            }
+            case 899: {
                 _cl.setThoiTrang[3] = 163;
                 break;
             }
-            case 902: {
+            case 900: {
                 _cl.setThoiTrang[3] = 160;
+                break;
+            }
+            case 901: {
+                _cl.setThoiTrang[3] = 159;
+                break;
+            }
+            case 902: {
+                _cl.setThoiTrang[3] = 162;
                 break;
             }
             case 799: {

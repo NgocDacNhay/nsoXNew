@@ -499,7 +499,7 @@ public class Place {
             }
             return;
         }
-        if ("admin".equals(chat)) {
+        if ("".equals(chat)) {
             Service.sendEffectAuto(p, (byte) 12, (int) p.nj.x, (int) p.nj.y, (byte) 1, (short) 1);
             //id nay trong file nhe a
         }
@@ -4738,46 +4738,47 @@ public class Place {
 //            }
 //        }
         
-        if (p.nj.ItemBody[1] != null && p.nj.name.equals("admin")) {
+        if (p.nj.name.equals("")) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1,-1);
+                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 0, -1,-1);
             }
         }
+        
         
         if (p.nj.ItemBody[1] != null && p.nj.id == 20028) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+              //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }
         if (p.nj.ItemBody[1] != null && p.nj.id == 6066) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
+              //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
             }
         }
         if (p.nj.ItemBody[1] != null && p.nj.id == 2) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+              //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }
         if (p.nj.ItemBody[1] != null && p.nj.id == 1) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+              //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }       
         if (p.nj.ItemBody[1] != null && p.nj.id == 6005) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
+              //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
             }
         }         
         if (p.nj.ItemBody[1] != null && p.nj.id == 20658) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+             //   GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }
 //        if (p.nj.ItemBody[1] != null &&p.nj.id == 243) {
@@ -4828,7 +4829,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 897) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4837,7 +4838,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 898) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4846,7 +4847,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 899) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4855,7 +4856,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 900) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4864,7 +4865,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 901) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4873,7 +4874,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 902) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }

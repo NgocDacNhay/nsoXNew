@@ -83,8 +83,9 @@ public class DaemonThread extends Thread {
                 flushTournamentData();
                 final int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
                 final int minute = Calendar.getInstance().get(Calendar.MINUTE);
+                final int sec = Calendar.getInstance().get(Calendar.SECOND);
 
-                if ((minute % 5 == 0)) {
+                if ((minute % 5 == 0 && sec == 0)) {
                     String str = Server.Tips[util.nextInt(0, 3)];
                     Manager.serverChat("Tips", "" + str);
                 }

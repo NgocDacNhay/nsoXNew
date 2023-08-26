@@ -128,14 +128,37 @@ public class useItem {
                 } else if (p.nj.isHuman) {
                     ThoiTrang.setThoiTrang(p.nj, item.id);
                 }
+                
                 Service.CharViewInfo(p, false);
             } else {
                 itemb = p.nj.get().ItemBody[data.type];
                 p.nj.ItemBag[index] = itemb;
+                if (itemb != null) {
+                    if (p.nj.isNhanban) {
+                        ThoiTrang.removeThoiTrangPT(p.nj.clone, itemb.id);
+                    } else if (p.nj.isHuman) {
+                        ThoiTrang.removeThoiTrang(p.nj, itemb.id);
+                    }
+                }
                 p.nj.get().ItemBody[data.type] = item;
+                
+                if(p.nj.isNhanban) {
+                    ThoiTrang.setThoiTrangPT(p.nj.clone, item.id);
+                } else if (p.nj.isHuman) {
+                    ThoiTrang.setThoiTrang(p.nj, item.id);
+                }
                 Service.CharViewInfo(p, false);
             }
-
+            for (int k = 0; k < 32; k++) {//Trang bị 2
+                    final Item itemD = p.nj.get().ItemBody[k];
+                    if (itemD != null) {
+                        if(p.nj.isNhanban) {
+                        ThoiTrang.setThoiTrangPT(p.nj.clone, itemD.id);
+                        } else if (p.nj.isHuman) {
+                            ThoiTrang.setThoiTrang(p.nj, itemD.id);
+                        }  
+                    }
+            }
             if (data.type == 10) {
                 p.mobMeMessage(0, (byte) 0);
             }
@@ -314,6 +337,7 @@ public class useItem {
             } else if (p.nj.isHuman) {
                 ThoiTrang.setThoiTrang(p.nj, item.id);
             }
+            
         }
         if (data.skill > 0) {
             byte skill = data.skill;
