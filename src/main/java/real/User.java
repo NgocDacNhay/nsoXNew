@@ -905,6 +905,16 @@ public class User extends Actor implements SendMessage {
         m.cleanup();
     }
 
+        public void getHp() throws IOException {
+        final Message m = new Message(-30);
+        m.writer().writeByte(-122);
+        m.writer().writeInt(this.nj.get().hp);
+        m.writer().flush();
+        this.sendMessage(m);
+        m.cleanup();
+    }
+
+
     @SneakyThrows
     private void lockAcc() {
 //        SQLManager.executeUpdate("UPDATE `player` set `lock`=1 where `id`=" + this.id + " limit 1;");
@@ -3381,6 +3391,38 @@ public class User extends Actor implements SendMessage {
         return true;
     }
 
+        public boolean buff05HP(final int param) {
+        if (this.nj.get().hp >= this.nj.get().getMaxHP()) {
+            try {
+                this.getHp();
+            } catch (IOException ex) {
+            }
+            return false;
+        }
+        this.nj.get().upHP(param);
+        try {
+            this.getHp();
+        } catch (IOException ex2) {
+        }
+        return true;
+        }
+
+                public boolean buff05MP(final int param) {
+        if (this.nj.get().mp >= this.nj.get().getMaxMP()) {
+            try {
+                this.getMp();
+            } catch (IOException ex) {
+            }
+            return false;
+        }
+        this.nj.get().upMP(param);
+        try {
+            this.getMp();
+        } catch (IOException ex2) {
+        }
+        return true;
+        }
+
     public void mobMeMessage(final int id, final byte boss) {
         try {
             if (id > 0) {
@@ -3933,6 +3975,10 @@ public class User extends Actor implements SendMessage {
         for (int i = 0; i < nj.getPlace().getUsers().size(); i++) {
             User player = nj.getPlace().getUsers().get(i);
             if (player.nj.id == pid) {
+                if(player.nj.ItemBody[10] != null && player.nj.ItemBody[10].id == 744){
+                    this.session.sendMessageLog("Không thể cừu sát đối phương");
+                    return;
+                }
                 m = new Message(68);
                 m.writer().writeInt(this.nj.id);
                 player.session.sendMessage(m);

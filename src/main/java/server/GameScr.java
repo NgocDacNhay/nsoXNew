@@ -2775,7 +2775,7 @@ public class GameScr {
         ArrdayLuck = new byte[]{3, 7, 15, 30};
         optionBikiep = new int[]{86, 87, 88, 89, 90, 91, 92, 94, 95, 96, 97, 98, 99};
         paramBikiep = new int[]{50, 1000, 500, 500, 500, 50, 10, 20, 100, 100, 100, 10, 500};
-        percentBikiep = new int[]{80, 75, 70, 65, 60, 55, 50, 45, 30, 25, 20, 15, 10, 7, 5, 1};
+        percentBikiep = new int[]{80, 75, 70, 65, 60, 55, 50, 45, 30, 25, 20, 15, 10, 7, 5, 50};
         optionPet = new int[]{87, 92, 94, 82, 94, 88, 89, 90, 86};
         paramPet = new int[]{2500, 20, 30, 2500, 20, 500, 500, 500, 50};
         percentPet = new int[]{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100};
@@ -2862,69 +2862,9 @@ public class GameScr {
             e.printStackTrace();
         }
     }
-
     public static void HuyNhiemVuDanhVong(User p) throws IOException {
         server.manager.sendTB(p, "Thông báo", "Đã hủy nhiệm vụ " + DanhVongData.nameNV1[p.nj.taskDanhVong[0]]);
         p.nj.isTaskDanhVong = 0;
         p.nj.taskDanhVong = new int[]{-1, -1, -1, 0, p.nj.countTaskDanhVong};
-    }
-
-    public static void TinhLuyenBK(User p, Item item, int type) throws IOException {
-        int ys = item.option.get(0).param;
-        if (ys >= 9) {
-            p.session.sendMessageLog("Bí kíp đã được tinh luyện đến mức tối đa");
-            return;
-        }
-        if (p.nj.xu < GameScr.XuUpBK[ys]) {
-            p.session.sendMessageLog("Bạn không đủ xu để nâng cấp Bí kíp");
-            return;
-        }
-        if (p.luong < GameScr.goldUpBK[ys]) {
-            p.session.sendMessageLog("Bạn không đủ lượng để nâng cấp Bí kíp");
-            return;
-
-        }
-        GameScr.HandleTinhLuyenBK(p, item, type);
-        Message m = new Message(13);
-        m.writer().writeInt(p.nj.xu);
-        m.writer().writeInt(p.nj.yen);
-        m.writer().writeInt(p.luong);
-        m.writer().flush();
-        p.session.sendMessage(m);
-        m.cleanup();
-    }
-
-    private static void HandleTinhLuyenBK(User p, Item item, int type) {
-        try {
-            int ys = p.nj.ItemBody[15].option.get(0).param;
-            int upPer = GameScr.percentUpBK[ys];
-            p.nj.xu -= GameScr.XuUpBK[ys];
-            p.luong -= GameScr.goldUpBK[ys];
-            if (util.nextInt(120) < upPer) {
-                p.nj.ItemBody[15].UpBKnext((byte) 1);
-                p.nj.ItemBody[15].quantity = 1;
-                p.nj.ItemBody[15].isLock = true;
-                p.nj.ItemBody[15].upgrade = 0;
-                p.nj.addItemBag(false, p.nj.ItemBody[15]);
-                p.nj.removeItemBody((byte) 15);
-                String chat = null;
-                switch (util.nextInt(1, 3)) {
-                    case 1:
-                        chat = "May quá, ta mém làm mất nó cho cá độ rồi ^^";
-                        break;
-                    case 2:
-                        chat = "Ngươi may mắn đấy, ta vừa ngủ quên trong lúc luyện nó";
-                        break;
-                    case 3:
-                        chat = "Haizz, cấp độ này dễ quá ta cần cấp độ cao hơn.";
-                        break;
-                }
-                p.nj.getPlace().chatNPC(p, 40, chat);
-            } else {
-                p.sendYellowMessage("Nâng cấp Bí kíp thất bại!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

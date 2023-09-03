@@ -2595,142 +2595,119 @@ public class MenuController {
                 case 40: {
                     switch (menuId) {
                         case 0: {
-                            if (p.nj.isNhanban) {
-                                p.session.sendMessageLog("Chức năng này không dành cho phân thân");
-                                return;
+                            if (p.nj.get().nclass == 0) {
+                                p.session.sendMessageLog("Bạn phải vào lớp để sử dụng chức năng này");
+                                break;
                             }
-                            if (p.nj.ItemBody[15] == null) {
-                                p.nj.getPlace().chatNPC(p, (short) npcId, "Hãy mang Bí Kíp vào");
-                                return;
+                            if (p.nj.getAvailableBag() == 0) {
+                                p.session.sendMessageLog("Hành trang không đủ chỗ trống");
+                                break;
                             }
-                            if (p.nj.ItemBody[15].expires > 0) {
-                                p.session.sendMessageLog("Không thể tinh luyện Bí Kíp có hạn sủ dụng.");
-                                return;
+                            if (p.nj.get().getLevel() < 60) {
+                                p.nj.getPlace().chatNPC(p, (short) 40, "Yêu cầu level 60");
+                                break;
                             }
-                            if (p.nj.ItemBody[15].option.size() <= 0) {
-                                p.nj.getPlace().chatNPC(p, (short) npcId, "Bí kíp của ngươi chưa có chỉ số");
-                                return;
+                            if (p.luong < 200) {
+                                p.session.sendMessageLog("Bạn không có đủ 200 lượng");
+                                break;
                             }
-                            if (p.nj.ItemBody[15].option.get(0).id != 85) {
-                                p.nj.getPlace().chatNPC(p, (short) npcId, "Ngươi không thể tinh luyện Bí Kíp này!");
-                                return;
-                            }
-                            if (p.nj.ItemBody[15].option.get(0).param >= 9) {
-                                p.nj.getPlace().chatNPC(p, (short) npcId, "Bí Kíp đa đạt cấp độ tối đa");
-                                return;
-                            }
-                            Service.startYesNoDlg(p, (byte) 4, "Bạn có muốn tinh luyện Bí Kíp đang sử dụng lên cấp độ " + GameScr.CapDoBK[p.nj.ItemBody[15].option.get(0).param] + " với " + GameScr.XuUpBK[p.nj.ItemBody[15].option.get(0).param] + " xu và " + GameScr.goldUpBK[p.nj.ItemBody[15].option.get(0).param] + " lượng với tỉ lệ " + GameScr.percentUpBK[p.nj.ItemBody[15].option.get(0).param] + "% không?");
+                            final Item it = ItemData.itemDefault(396+p.nj.get().nclass);
+                            it.setLock(true);
+//                            it.isExpires = true;
+//                            it.expires = System.currentTimeMillis() + 2592000000L;
+                            p.nj.addItemBag(true, it);
+                            p.upluongMessage(-200);
                             break;
                         }
                         case 1: {
-                            if (p.nj.ItemBody[15] == null) {
-                                p.nj.getPlace().chatNPC(p, (short) npcId, "Hãy mang Bí Kíp vào");
-                                return;
+                            if (p.nj.get().ItemBody[15] == null) {
+                                p.session.sendMessageLog("Bạn phải đeo bí kiếp mới có thể luyện bí kiếp");
+                                break;
                             }
-                            if (p.nj.ItemBody[15].expires > 0) {
-                                p.nj.getPlace().chatNPC(p, (short) npcId, "Chỉ được luyện bí kiếp vĩnh viễn");
-                                return;
-                            }
-                            if (p.nj.isNhanban) {
-                                p.session.sendMessageLog("Chức năng này không dành cho phân thân");
-                                return;
-                            }
-                            if (p.nj.getAvailableBag() < 1) {
+                            if (p.nj.getAvailableBag() == 0) {
                                 p.session.sendMessageLog("Hành trang không đủ chỗ trống");
-                                return;
-                            }
-                            if (p.nj.getLevel() < 60) {
-                                p.session.sendMessageLog("Cấp độ của ngươi chưa đạt 60");
-                                return;
-                            }
-                            if (p.luong < 1000) {
-                                p.session.sendMessageLog("Không đủ 1000 lượng");
-                                return;
-                            } else {
-                                Item itemUp = p.nj.ItemBody[15];
-                                itemUp.option.clear();
-                                Option o = new Option(85, 0);
-                                itemUp.option.add(o);
-                                byte i;
-                                int op;
-                                Option option2;
-                                for (i = 0; i < util.nextInt(1, 7); ++i) {
-                                    op = -1;
-                                    do {
-                                        op = util.nextInt(MenuController.OpIdBK.length);
-                                        for (Option option : itemUp.option) {
-                                            if (MenuController.OpIdBK[op] == option.id) {
-                                                op = -1;
-                                                break;
-                                            }
-                                        }
-                                    } while (op == -1);
-                                    if (op == -1) {
-                                        return;
-                                    }
-                                    int par = MenuController.ParramOpBK[op];
-                                    option2 = new Option(MenuController.OpIdBK[op], par);
-                                    itemUp.option.add(option2);
-                                }
-                                itemUp.quantity = 1;
-                                itemUp.isLock = true;
-                                itemUp.upgrade = 0;
-                                p.nj.addItemBag(false, itemUp);
-                                p.upluongMessage(-1000);
-                                p.nj.removeItemBody((byte) 15);
-                            }
-                            switch (util.nextInt(1, 2)) {
-                                case 1: {
-                                    p.nj.getPlace().chatNPC(p, (short) npcId, "Đấy chỉ số ngon rồi đấy! Ngươi hãy tin ở ta.");
-                                    break;
-                                }
-                                case 2: {
-                                    p.nj.getPlace().chatNPC(p, (short) npcId, "Mời người xem chỉ số! Ta không làm ngươi thất vọng đâu.");
-                                    break;
-                                }
-                                case 3: {
-                                    p.nj.getPlace().chatNPC(p, (short) npcId, "Ta đã giúp ngươi luyện nó. Hãy xem chỉ số đi nào");
-                                    break;
-                                }
-                            }
-                            break;
-                        }
-                        case 2: {
-                            if (p.nj.getAvailableBag() < 1) {
-                                p.session.sendMessageLog("Hành trang không đủ chỗ trống");
-                                return;
-                            }
-                            if (p.nj.getLevel() < 60) {
-                                p.session.sendMessageLog("Cấp độ của ngươi chưa đạt 60");
-                                return;
-                            }
-                            if (p.luong < 300) {
-                                p.session.sendMessageLog("Bạn không có đủ 300 lượng");
-                                return;
-                            }
-                            Item it = ItemData.itemDefault(396 + p.nj.nclass);
-                            it.setLock(true);
-                            p.nj.addItemBag(true, it);
-                            p.upluongMessage(-300L);
-                            break;
-                        }
-                        case 3: // Cái này là xóa hủy bí kíp
-                            if (p.nj.ItemBody[15] == null) {
-                                p.session.sendMessageLog("Bạn phải đeo bí kiếp mới có thể xóa được nhé");
-                                return;
-                            }
-                            if (p.nj.getLevel() < 60) {
-                                p.session.sendMessageLog("Cấp độ của ngươi chưa đạt 60");
-                                return;
+                                break;
                             }
                             if (p.luong < 500) {
                                 p.session.sendMessageLog("Bạn không có đủ 500 lượng");
-                                return;
+                                break;
                             }
-
-                            p.nj.removeItemBody((byte) 15);
-                            p.upluongMessage(-500L);
+                            final Item it = p.nj.get().ItemBody[15];
+                            if (it.getUpgrade() >= 1) {
+                                p.session.sendMessageLog("Bí kiếp đã nâng cấp không thể luyện hóa");
+                                break;
+                            }
+                            int a = 0;
+                            for (int i = 0; i < GameScr.optionBikiep.length; i++) {
+                                if (util.nextInt(1,5) < 3) {
+                                    it.option.add(new Option(GameScr.optionBikiep[i],util.nextInt(GameScr.paramBikiep[i],GameScr.paramBikiep[i]*70/100)));
+                                    a++;
+                                }
+                            }
+                            it.setLock(true);
+                            p.nj.addItemBag(true, it);
+                            p.nj.removeItemBody((byte)15);
+                            p.upluongMessage(-500);
+                            String b = "";
+                            if (a > 5) {
+                                b = "Khá mạnh đó, ngươi thấy ta làm tốt không ?";
+                            } else if (a > 2) {
+                                b = "Không tệ, ngươi xem có ổn không ?";
+                            } else {
+                                b = "Ta chỉ giúp được cho ngươi đến thế thôi. Ta xin lỗi !";
+                            }
+                            p.nj.getPlace().chatNPC(p, (short)40, b);
                             break;
+                        }
+                        case 2: {
+                            if (p.nj.get().ItemBody[15] == null) {
+                                p.session.sendMessageLog("Bạn phải đeo bí kiếp mới có thể nâng cấp bí kiếp");
+                                break;
+                            }
+                            if (p.nj.getAvailableBag() == 0) {
+                                p.session.sendMessageLog("Hành trang không đủ chỗ trống");
+                                break;
+                            }
+                            if (p.luong < 500) {
+                                p.session.sendMessageLog("Bạn không có đủ 500 lượng");
+                                break;
+                            }
+                            Item it = p.nj.get().ItemBody[15];
+                            if (it.getUpgrade() >= 16) {
+                                p.session.sendMessageLog("Bí kiếp đã đạt cấp tối đa");
+                                break;
+                            }
+                            if (GameScr.percentBikiep[it.getUpgrade()] >= util.nextInt(100)) {
+                                for (byte k = 0; k < it.option.size(); ++k) {
+                                    final Option option = it.option.get(k);
+                                    float dac = option.param * 10 / 100;
+                                    if(dac < 1) option.param += 1;
+                                    else
+                                    option.param += option.param * 10 / 100;
+                                }
+                                it.setUpgrade(it.getUpgrade()+1);
+                                it.setLock(true);
+                                p.nj.addItemBag(true, it);
+                                p.sendYellowMessage("Nâng cấp thành công!");
+                                p.nj.removeItemBody((byte)15);
+                            } else {
+                                p.sendYellowMessage("Nâng cấp thất bại!");
+                            }
+                            p.upluongMessage(-500);
+                            break;
+                        }
+                        case 3: {
+                            if(p.nj.get().ItemBody[15] == null){
+                                p.nj.getPlace().chatNPC(p, (short)40, "Bí kíp không có đòi hủy?");
+                                break;
+                            }
+                            Service.startYesNoDlg(p, (byte) 4, "Con có chắc chắn muốn huỷ bí kíp không?");
+                            break;
+                        }
+                        case 4: {
+                            p.nj.getPlace().chatNPC(p, (short)40, "Ta có thể giúp ngươi tăng sức mạnh cho bí kíp, ngươi chỉ cần trả cho ta ít ngân lượng.");
+                            break;
+                        }
                     }
                     break;
                 }

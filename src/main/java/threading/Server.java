@@ -185,11 +185,7 @@ public class Server extends WindowAdapter implements ActionListener {
         }
         if (e.getActionCommand().equals("player")) {
             System.out.println("Lưu dữ liệu người chơi");
-              instance.daemonThread = new DaemonThread();
-            
-            instance.daemonThread.addRunner(Server.updateTTA);
-            instance.daemonThread.addRunner(Server.updateRefreshBoss);
-            instance.daemonThread.addRunner(Server.updateBattle);
+        
         
         }
         if (e.getActionCommand().equals("restartDB")) {
@@ -205,9 +201,10 @@ public class Server extends WindowAdapter implements ActionListener {
             manager.serverChat("Admin", "Máy chủ bảo trì sau 1 phút, vui lòng thoát game để tránh mất dữ liệu. Nếu cố tình không thoát chúng tôi không chịu trách nhiệm!");
             Service.startOKDlgServer("Máy chủ bảo trì sau 1 phút, vui lòng thoát game để tránh mất dữ liệu. Nếu cố tình không thoát chúng tôi không chịu trách nhiệm!");
             System.out.println("Hệ thống Đóng s1au 20s.");
-            Thread.sleep(20000);
+            Thread.sleep(5000);
             System.out.println("Hệ thống Bắt đầu đóng máy chủ.");
-            this.stop();
+            frame.dispose();
+            System.exit(0);
         } catch (Exception e) {
             e.printStackTrace();
         }

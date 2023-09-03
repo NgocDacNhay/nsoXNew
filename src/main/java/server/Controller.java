@@ -1094,7 +1094,8 @@ public class Controller implements ISessionHandler {
                         if (player.nj.ItemBody[15] == null) {
                             return;
                         }
-                        GameScr.TinhLuyenBK(player, player.nj.ItemBody[15], 0);
+                        player.nj.removeItemBody((byte)15);
+                        player.nj.getPlace().chatNPC(player, (short)40, "Ta đã hủy bí kiếp cho ngươi.");
                         break;
                     }
                     case 12: {

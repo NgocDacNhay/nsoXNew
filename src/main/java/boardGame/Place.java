@@ -499,10 +499,10 @@ public class Place {
             }
             return;
         }
-        if ("admin".equals(chat)) {
-            Service.sendEffectAuto(p, (byte) 12, (int) p.nj.x, (int) p.nj.y, (byte) 1, (short) 1);
+    //    if ("admin".equals(chat)) {
+    //        Service.sendEffectAuto(p, (byte) 12, (int) p.nj.x, (int) p.nj.y, (byte) 1, (short) 1);
             //id nay trong file nhe a
-        }
+    //    }
 
     }
 
@@ -3288,12 +3288,14 @@ public class Place {
         final int oldhp = other.hp;
         skillEffect(body, other);
         body.damage(other);
+        
         if (other.isDie) {
             if (battle != null) {
                 battle.updateBattler(body.c, other.isHuman, other);
             }
 
         }
+        
         if (other.isDie) {
 
             if (body.getTypepk() == PK_DOSAT) {
@@ -3379,7 +3381,11 @@ public class Place {
         if (body == null || other == null) {
             return false;
         }
-
+        User p1 = body.c.p; 
+        if(body.getTypepk() == PK_DOSAT && other.ItemBody[10] != null && other.ItemBody[10].id == 744){
+            p1.sendYellowMessage("Có dame đâu mà đánh");
+            return false;
+        }
         short myPk = body.getTypepk();
         val p = body.c.p;
 
@@ -4576,7 +4582,7 @@ public class Place {
     private boolean recoverTa = false;
 
     //<editor-fold desc="Update event loop">
-//    @SneakyThrows
+    @SneakyThrows
     private void updateUser(final @Nullable User p) throws IOException {
         if (p == null) {
             return;
@@ -4595,6 +4601,8 @@ public class Place {
             p.nj.get().upMP(p.nj.getPramItem(99));
             MessageSubCommand.sendHP(p.nj.get(), getUsers());
             MessageSubCommand.sendMP(p.nj.get(), getUsers());
+            p.buff05HP(0);
+            p.buff05MP(0);
         }
         if ((p.nj.eff5buffHP() > 0 || p.nj.get().eff5buffMP() > 0) && p.nj.eff5buff <= System.currentTimeMillis()) {
             p.nj.eff5buff = System.currentTimeMillis() + 5000L;
@@ -4738,46 +4746,46 @@ public class Place {
 //            }
 //        }
         
-        if (p.nj.ItemBody[1] != null && p.nj.name.equals("admin")) {
-            for (int k = 0; k < this.getUsers().size(); ++k) {
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1,-1);
-            }
-        }
+    //    if (p.nj.ItemBody[1] != null && p.nj.name.equals("admin")) {
+    //        for (int k = 0; k < this.getUsers().size(); ++k) {
+        //        GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1,-1);
+    //        }
+    //    }
         
         if (p.nj.ItemBody[1] != null && p.nj.id == 20028) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+    //            GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }
         if (p.nj.ItemBody[1] != null && p.nj.id == 6066) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
+    //            GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
             }
         }
         if (p.nj.ItemBody[1] != null && p.nj.id == 2) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+   //             GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }
         if (p.nj.ItemBody[1] != null && p.nj.id == 1) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+    //            GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }       
         if (p.nj.ItemBody[1] != null && p.nj.id == 6005) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
+    //            GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 107, -1, -1);                
             }
         }         
         if (p.nj.ItemBody[1] != null && p.nj.id == 20658) {
             for (int k = 0; k < this.getUsers().size(); ++k) {
               //  GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 232, 0, 0);
-                GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
+    //            GameCanvas.addEffect(this.getUsers().get(k).session, (byte) 0, p.nj.get().id, (short) 77, -1, -1);                
             }
         }
 //        if (p.nj.ItemBody[1] != null &&p.nj.id == 243) {
@@ -4828,7 +4836,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 897) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4837,7 +4845,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 898) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+         //           GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4846,7 +4854,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 899) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4855,7 +4863,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 900) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4864,7 +4872,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 901) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }
@@ -4873,7 +4881,7 @@ public class Place {
             Item item = p.nj.get().ItemBody[j];
             if (item != null && item.id == 902) {
                 for (int k = this.getUsers().size() - 1; k >= 0; k--) {;
-                    GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
+        //            GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 116, 0, 600);
       //              GameCanvas.addEffect((this.getUsers().get(k)).session, (byte) 0, p.nj.get().id, (short) 87, 0, 600);
                 }
             }

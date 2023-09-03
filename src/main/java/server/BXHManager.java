@@ -39,7 +39,7 @@ public class BXHManager {
                 for (int i = 0; i < BXHManager.bangXH.length; ++i) {
                     initBXH(i);
                 }
-            Server.instance.daemonThread = new DaemonThread();
+            
             BXHManager.init();
             //    System.err.println("Refresh BXH");
             }
